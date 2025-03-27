@@ -1,8 +1,11 @@
-#include "philosopher.hpp"
+#include "headers/philosopher.hpp"
+
 #include <iostream>
 #include <thread>
 #include <chrono>
 #include <mutex>
+
+#include "headers/waiter.hpp"
 
 // Global (or static) mutex used to synchronize console output
 static std::mutex printMutex;

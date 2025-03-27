@@ -1,4 +1,5 @@
-#include "waiter.hpp"
+#include "headers/waiter.hpp"
+
 #include <iostream>
 
 // The Waiter class is responsible for managing forks in the Dining Philosophers problem.

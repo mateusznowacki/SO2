@@ -1,8 +1,9 @@
 #ifndef PHILOSOPHER_HPP
 #define PHILOSOPHER_HPP
 
-#include "states.hpp"
 #include "waiter.hpp"
+#include "states.hpp"
+
 #include <thread>
 #include <chrono>
 
