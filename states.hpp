@@ -1,7 +1,7 @@
 #ifndef STATES_HPP
 #define STATES_HPP
 
-// Stany filozofa – pomocniczy enum do wypisywania czytelnych informacji.
+// Possible states of the philosopher
 enum PhilosopherState {
     THINKING,
     HUNGRY,

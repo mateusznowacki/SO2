@@ -11,20 +11,20 @@ private:
     int id;
     int numberOfPhilosophers;
     int iterations;
-    Waiter* waiter; // wskaźnik do kelnera
+    Waiter* waiter; // pointer to the waiter object
 
 public:
-    // Konstruktor
+    // Constructor
     Philosopher(int philosopherID, int numPhilosophers, int iters, Waiter* w);
 
-    // Metoda główna, którą wywoła wątek
+    // Main method of the philosopher's actions
     void run();
 
-    // Pomocnicza metoda do czytelnego wypisywania stanu
+    // Method to print the state of the philosopher
     void printState(PhilosopherState state);
 };
 
-// Funkcja startująca wątek (tzw. wrapper), żeby można było użyć w std::thread
+// Wrapper function for the thread
 void philosopherThreadFunction(Philosopher* philosopher);
 
 #endif
