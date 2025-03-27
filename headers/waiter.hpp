@@ -42,9 +42,9 @@ public:
 
 private:
     bool* forkAvailable;                 // Availability of each fork
-    int numberOfForks;                  // Total number of forks
-    std::mutex mtx;                     // Mutex to protect shared resources
-    std::condition_variable condition;  // Thread synchronization
+    int numberOfForks;                   // Total number of forks
+    std::mutex mtx;                      // Mutex to protect shared resources
+    std::condition_variable condition;   // Thread synchronization
 };
 
 #endif  // HEADERS_WAITER_HPP_
