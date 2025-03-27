@@ -1,5 +1,5 @@
-#ifndef WAITER_HPP
-#define WAITER_HPP
+#ifndef HEADERS_WAITER_HPP_
+#define HEADERS_WAITER_HPP_
 
 #include <mutex>
 #include <condition_variable>
@@ -9,20 +9,13 @@
  * Dining Philosophers problem. It ensures that philosophers can safely
  * acquire and release forks without causing a deadlock.
  */
-class Waiter
-{
-private:
-    bool* forkAvailable; // Array indicating availability of each fork
-    int numberOfForks; // Total number of forks (equal to number of philosophers)
-    std::mutex mtx; // Mutex to protect shared resources
-    std::condition_variable condition; // Condition variable for thread synchronization
-
+class Waiter {
 public:
     /**
      * Constructor.
      * @param n Number of philosophers (and forks).
      */
-    Waiter(int n);
+    explicit Waiter(int n);
 
     /**
      * Destructor.
@@ -46,6 +39,12 @@ public:
      * @param rightFork Index of the right fork.
      */
     void releaseForks(int philosopherID, int leftFork, int rightFork);
+
+private:
+    bool* forkAvailable;           // Array indicating availability of each fork
+    int numberOfForks;             // Total number of forks
+    std::mutex mtx;                // Mutex to protect shared resources
+    std::condition_variable condition;  // Synchronization primitive
 };
 
-#endif // WAITER_HPP
+#endif  // HEADERS_WAITER_HPP_

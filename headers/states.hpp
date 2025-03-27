@@ -1,12 +1,11 @@
-#ifndef STATES_HPP
-#define STATES_HPP
+#ifndef HEADERS_STATES_HPP_
+#define HEADERS_STATES_HPP_
 
 // Possible states of the philosopher
-enum PhilosopherState
-{
+enum PhilosopherState {
     THINKING,
     HUNGRY,
     EATING
-};
+  };
 
-#endif
+#endif  // HEADERS_STATES_HPP_
