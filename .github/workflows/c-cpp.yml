@@ -1,0 +1,28 @@
+name: C++ Lint and Check
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install cpplint and cppcheck
+      run: |
+        pip install cpplint
+        sudo apt-get install cppcheck -y
+
+    - name: Run cpplint
+      run: |
+        find . -name "*.cpp" -o -name "*.hpp" -o -name "*.h" | xargs cpplint --filter=-legal
+
+    - name: Run cppcheck
+      run: |
+        cppcheck --enable=all --inconclusive --quiet --std=c++17 .
