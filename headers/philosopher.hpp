@@ -4,8 +4,8 @@
 #include <thread>
 #include <chrono>
 
-#include "headers/waiter.hpp"
-#include "headers/states.hpp"
+#include "waiter.hpp"
+#include "states.hpp"
 
 class Philosopher {
  public:
