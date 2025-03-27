@@ -41,10 +41,10 @@ public:
     void releaseForks(int philosopherID, int leftFork, int rightFork);
 
 private:
-    bool* forkAvailable;           // Array indicating availability of each fork
-    int numberOfForks;             // Total number of forks
-    std::mutex mtx;                // Mutex to protect shared resources
-    std::condition_variable condition;  // Synchronization primitive
+    bool* forkAvailable;                 // Availability of each fork
+    int numberOfForks;                  // Total number of forks
+    std::mutex mtx;                     // Mutex to protect shared resources
+    std::condition_variable condition;  // Thread synchronization
 };
 
 #endif  // HEADERS_WAITER_HPP_
