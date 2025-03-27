@@ -10,7 +10,7 @@
  * acquire and release forks without causing a deadlock.
  */
 class Waiter {
-public:
+ public:
     /**
      * Constructor.
      * @param n Number of philosophers (and forks).
@@ -40,7 +40,7 @@ public:
      */
     void releaseForks(int philosopherID, int leftFork, int rightFork);
 
-private:
+ private:
     bool* forkAvailable;                 // Availability of each fork
     int numberOfForks;                   // Total number of forks
     std::mutex mtx;                      // Mutex to protect shared resources

@@ -8,7 +8,7 @@
 #include "headers/states.hpp"
 
 class Philosopher {
-public:
+ public:
     // Constructor
     Philosopher(int philosopherID, int numPhilosophers,
                 int iters, Waiter* w);
@@ -19,7 +19,7 @@ public:
     // Method to print the state of the philosopher
     void printState(PhilosopherState state);
 
-private:
+ private:
     int id;
     int numberOfPhilosophers;
     int iterations;
