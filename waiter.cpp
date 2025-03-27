@@ -11,7 +11,7 @@ Waiter::Waiter(int n)
 
     // Dynamically allocate a boolean array to track fork availability.
     forkAvailable = new bool[n];
-    for(int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
         // Initially, all forks are available.
         forkAvailable[i] = true;
@@ -30,7 +30,7 @@ void Waiter::requestForks(int philosopherID, int leftFork, int rightFork)
     std::unique_lock<std::mutex> lock(mtx);
 
     // If either fork is not available, wait until the condition variable is signaled.
-    while(!forkAvailable[leftFork] || !forkAvailable[rightFork])
+    while (!forkAvailable[leftFork] || !forkAvailable[rightFork])
     {
         condition.wait(lock);
     }

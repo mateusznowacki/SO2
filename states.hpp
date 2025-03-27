@@ -2,7 +2,8 @@
 #define STATES_HPP
 
 // Possible states of the philosopher
-enum PhilosopherState {
+enum PhilosopherState
+{
     THINKING,
     HUNGRY,
     EATING

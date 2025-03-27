@@ -9,12 +9,13 @@
  * Dining Philosophers problem. It ensures that philosophers can safely
  * acquire and release forks without causing a deadlock.
  */
-class Waiter {
+class Waiter
+{
 private:
-    bool* forkAvailable;                // Array indicating availability of each fork
-    int numberOfForks;                  // Total number of forks (equal to number of philosophers)
-    std::mutex mtx;                     // Mutex to protect shared resources
-    std::condition_variable condition;  // Condition variable for thread synchronization
+    bool* forkAvailable; // Array indicating availability of each fork
+    int numberOfForks; // Total number of forks (equal to number of philosophers)
+    std::mutex mtx; // Mutex to protect shared resources
+    std::condition_variable condition; // Condition variable for thread synchronization
 
 public:
     /**

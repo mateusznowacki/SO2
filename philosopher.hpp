@@ -6,7 +6,8 @@
 #include <thread>
 #include <chrono>
 
-class Philosopher {
+class Philosopher
+{
 private:
     int id;
     int numberOfPhilosophers;
