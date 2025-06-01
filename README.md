@@ -37,7 +37,8 @@ cmake --build build --config Release
 ./build/SO2_ChatServer.exe
 ```
 
-Serwer domyślnie nasłuchuje na porcie `23`.
+Serwer domyślnie nasłuchuje na porcie `23`. Połączenie najlepiej nawiązać poprzez klient PuTTY połączneiem typu "Raw". 
+Klient nie jest przystosowany do obsługi protokołu Telnet ani tym bardziej SSH.
 
 ---
 

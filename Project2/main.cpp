@@ -56,6 +56,10 @@ int main() {
             continue;
         }
 
+        // Wyłączamy Nagle Algorithm (wymuszamy natychmiastowe send() bez buforowania TCP)
+        int flag = 1;
+        setsockopt(client_fd, IPPROTO_TCP, TCP_NODELAY, reinterpret_cast<const char *>(&flag), sizeof(flag));
+
         std::thread(client_thread, client_fd).detach();
     }
 
