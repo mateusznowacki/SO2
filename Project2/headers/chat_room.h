@@ -1,19 +1,19 @@
-#ifndef CHAT_ROOM_H
-#define CHAT_ROOM_H
+#ifndef PROJECT2_HEADERS_CHAT_ROOM_H_
+#define PROJECT2_HEADERS_CHAT_ROOM_H_
 
 #include <string>
 #include <set>
 #include "SpinLock.h"
 
 class ChatRoom {
-private:
+  private:
     std::string room_name;
     std::string history_filename;
     std::set<int> clients;
     SpinLock room_mutex;
 
-public:
-    ChatRoom(const std::string& name);
+  public:
+    explicit ChatRoom(const std::string& name);
 
     void add_client(int client_fd);
     void remove_client(int client_fd);
@@ -22,4 +22,4 @@ public:
     void send_history(int client_fd);
 };
 
-#endif
+#endif  //PROJECT2_HEADERS_CHAT_ROOM_H_

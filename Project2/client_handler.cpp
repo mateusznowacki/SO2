@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cstring>
 #include <algorithm> // dla std::remove
+#include <string>
 
 #ifdef _WIN32
 #include <winsock2.h>

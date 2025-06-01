@@ -1,5 +1,5 @@
-#ifndef SPINLOCK_H
-#define SPINLOCK_H
+#ifndef PROJECT2_HEADERS_SPINLOCK_H_
+#define PROJECT2_HEADERS_SPINLOCK_H_
 
 /**
  * SpinLock – a simple busy-wait mutual exclusion lock.
@@ -22,4 +22,4 @@ public:
     }
 };
 
-#endif
+#endif // PROJECT2_HEADERS_SPINLOCK_H_

@@ -1,12 +1,12 @@
-#ifndef CLIENT_HANDLER_H
-#define CLIENT_HANDLER_H
+#ifndef PROJECT2_HEADERS_CLIENT_HANDLER_H+
+#define PROJECT2_HEADERS_CLIENT_HANDLER_H_
 
 #include <string>
 #include "user_manager.h"
 #include "chat_room_manager.h"
 
 class ClientHandler {
-private:
+  private:
     int client_fd;
     UserManager* user_manager;
     ChatRoomManager* room_manager;
@@ -15,9 +15,9 @@ private:
     void send_message(const std::string& msg);
     std::string receive_message();
 
-public:
+  public:
     ClientHandler(int client_socket, UserManager* userMgr, ChatRoomManager* roomMgr);
     void handle();
 };
 
-#endif
+#endif  //  PROJECT2_HEADERS_CLIENT_HANDLER_H
