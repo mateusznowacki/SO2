@@ -7,11 +7,11 @@
 #include "SpinLock.h"
 
 class ChatRoomManager {
-  private:
+ private:
     std::map<std::string, ChatRoom*> rooms;
     SpinLock manager_mutex;
 
-  public:
+ public:
     ChatRoomManager();
     ~ChatRoomManager();
 

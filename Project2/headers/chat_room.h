@@ -6,13 +6,13 @@
 #include "SpinLock.h"
 
 class ChatRoom {
-  private:
+ private:
     std::string room_name;
     std::string history_filename;
     std::set<int> clients;
     SpinLock room_mutex;
 
-  public:
+ public:
     explicit ChatRoom(const std::string& name);
 
     void add_client(int client_fd);

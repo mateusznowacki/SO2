@@ -6,7 +6,7 @@
 #include "chat_room_manager.h"
 
 class ClientHandler {
-  private:
+ private:
     int client_fd;
     UserManager* user_manager;
     ChatRoomManager* room_manager;
@@ -15,7 +15,7 @@ class ClientHandler {
     void send_message(const std::string& msg);
     std::string receive_message();
 
-  public:
+ public:
     ClientHandler(int client_socket, UserManager* userMgr, ChatRoomManager* roomMgr);
     void handle();
 };

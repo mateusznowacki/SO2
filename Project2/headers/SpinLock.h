@@ -7,10 +7,10 @@
  * This is NOT reentrant and should only be used for short critical sections.
  */
 class SpinLock {
-  private:
+ private:
     volatile int locked = 0;
 
-  public:
+ public:
     void lock() {
         // Busy wait until the lock is acquired
         while (__sync_lock_test_and_set(&locked, 1)) {}

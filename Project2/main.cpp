@@ -1,11 +1,14 @@
 #include "user_manager.h"
 #include "client_handler.h"
 #include "chat_room_manager.h"
+
 #include <winsock2.h>
 #include <ws2tcpip.h>
-#pragma comment(lib, "Ws2_32.lib")
+
 #include <iostream>
 #include <thread>
+
+#pragma comment(lib, "Ws2_32.lib")
 
 
 
