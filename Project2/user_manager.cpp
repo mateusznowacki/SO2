@@ -3,6 +3,7 @@
 #include <sstream>
 #include <iostream>
 #include <algorithm>
+#include <string>
 
 UserManager::UserManager(const std::string& filename) : user_file(filename) {}
 
