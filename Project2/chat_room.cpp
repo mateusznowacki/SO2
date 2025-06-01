@@ -29,7 +29,8 @@ void ChatRoom::broadcast_message(const std::string& message, int sender_fd) {
     std::string formatted = message;
     if (formatted.back() != '\n') {
         formatted += "\r\n";
-    } else if (formatted.length() >= 2 && formatted.substr(formatted.length() - 2) != "\r\n") {
+    } else if (formatted.length() >= 2 && formatted.substr(
+        formatted.length() - 2) != "\r\n") {
         formatted.insert(formatted.length() - 1, "\r");
     }
 
@@ -37,13 +38,14 @@ void ChatRoom::broadcast_message(const std::string& message, int sender_fd) {
     for (int fd : clients) {
         if (fd != sender_fd) {
 #ifdef _WIN32
-            send(fd, formatted.c_str(), static_cast<int>(formatted.length()), 0);
+            send(fd, formatted.c_str(),
+                static_cast<int>(formatted.length()), 0);
 #else
             write(fd, formatted.c_str(), formatted.length());
 #endif
         }
     }
-    save_message(formatted); // zapisujemy sformatowaną wersję
+    save_message(formatted);  //  zapisujemy sformatowaną wersję
     room_mutex.unlock();
 }
 

@@ -1,5 +1,5 @@
-#ifndef HEADERS_PHILOSOPHER_HPP_
-#define HEADERS_PHILOSOPHER_HPP_
+#ifndef PROJECT1_HEADERS_PHILOSOPHER_HPP_
+#define PROJECT1_HEADERS_PHILOSOPHER_HPP_
 
 #include <thread>
 #include <chrono>
@@ -29,4 +29,4 @@ class Philosopher {
 // Wrapper function for the thread
 void philosopherThreadFunction(Philosopher* philosopher);
 
-#endif  // HEADERS_PHILOSOPHER_HPP_
+#endif  // PROJECT1_HEADERS_PHILOSOPHER_HPP_

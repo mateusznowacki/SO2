@@ -1,5 +1,5 @@
-#ifndef HEADERS_WAITER_HPP_
-#define HEADERS_WAITER_HPP_
+#ifndef PROJECT1_HEADERS_WAITER_HPP_
+#define PROJECT1_HEADERS_WAITER_HPP_
 
 #include <mutex>
 #include <condition_variable>
@@ -47,4 +47,4 @@ class Waiter {
     std::condition_variable condition;   // Thread synchronization
 };
 
-#endif  // HEADERS_WAITER_HPP_
+#endif  // PROJECT1_HEADERS_WAITER_HPP_

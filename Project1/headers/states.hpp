@@ -1,5 +1,5 @@
-#ifndef HEADERS_STATES_HPP_
-#define HEADERS_STATES_HPP_
+#ifndef PROJECT1_HEADERS_STATES_HPP_
+#define PROJECT1_HEADERS_STATES_HPP_
 
 // Possible states of the philosopher
 enum PhilosopherState {
@@ -8,4 +8,4 @@ enum PhilosopherState {
     EATING
   };
 
-#endif  // HEADERS_STATES_HPP_
+#endif  // PROJECT1_HEADERS_STATES_HPP_
