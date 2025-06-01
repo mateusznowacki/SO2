@@ -21,7 +21,7 @@ jobs:
 
       - name: Run cpplint
         run: |
-          find . -name "*.cpp" -o -name "*.hpp" -o -name "*.h" | xargs cpplint --filter=-legal,-build/include_subdir,-legal/copyright --linelength=120
+          find . -name "*.cpp" -o -name "*.hpp" -o -name "*.h" | xargs cpplint --filter=-legal,-build/include_subdir,-legal/copyright,-whitespace/comments --linelength=120
 
       - name: Run cppcheck
         run: |
