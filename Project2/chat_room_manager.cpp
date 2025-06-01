@@ -1,4 +1,5 @@
 #include "chat_room_manager.h"
+#include <string>
 
 ChatRoomManager::ChatRoomManager() {}
 
