@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.30)
+cmake_minimum_required(VERSION 3.29.6)
 project(SO2)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -21,7 +21,7 @@ add_executable(SO2
 )
 
 # Jeśli masz nagłówki w osobnym katalogu (np. headers/)
-# include_directories(headers) ← tylko jeśli faktycznie istnieje
+include_directories(headers)
 
 # Dołącz bibliotekę WinSock2 (dla Windows socket API)
 target_link_libraries(SO2 ws2_32)

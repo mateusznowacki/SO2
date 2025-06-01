@@ -7,7 +7,6 @@
 UserManager::UserManager(const std::string& filename) : user_file(filename) {}
 
 std::string UserManager::hash_password(const std::string& password) {
-    // Na potrzeby projektu: pseudo-hash (nie stosować w realnych systemach!)
     std::hash<std::string> hasher;
     return std::to_string(hasher(password));
 }

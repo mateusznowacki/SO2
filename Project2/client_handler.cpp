@@ -52,15 +52,21 @@ bool ClientHandler::authenticate_user(std::string& username) {
 
     send_message("Do you have an account? (yes/no): ");
     std::string answer = receive_message();
-    if (answer.empty()) return false;
+    do {
+        answer = receive_message();
+    } while (answer.empty());
 
     send_message("Enter username: ");
     username = receive_message();
-    if (username.empty()) return false;
+    do {
+        answer = receive_message();
+    } while (answer.empty());
 
     send_message("Enter password: ");
     std::string password = receive_message();
-    if (password.empty()) return false;
+    do {
+    answer = receive_message();
+} while (answer.empty());
 
     strip(username);
     strip(password);

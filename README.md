@@ -1,25 +1,30 @@
-# 🍝 SO2_Projekt – Problem jedzących filozofów
+# 💬 SO2\_Projekt – Serwer czatu wielopokojowego
 
 ---
 
-## 🧠 Opis problemu
+## 🧠 Opis projektu
 
-**Problem jedzących filozofów** to klasyczny problem synchronizacji procesów. Przy okrągłym stole siedzi `N` filozofów,
-a między nimi znajduje się `N` widelców – po jednym między każdą parą. Filozofowie naprzemiennie **myślą** i **jedzą
-spaghetti**, przy czym do jedzenia potrzebują **obu sąsiednich widelców**.
+Projekt realizuje serwer czatu pozwalający na:
 
-### Potencjalne problemy:
+* rejestrację i logowanie użytkowników,
+* tworzenie i obsługę wielu pokoi czatu,
+* przesyłanie wiadomości między użytkownikami w ramach pokoju,
+* zapisywanie i przesyłanie historii czatu dla każdego pokoju.
 
-- **Deadlock (zakleszczenie)**: gdy każdy filozof trzyma jeden widelec i czeka na drugi – nikt nie może jeść.
-- **Starvation (głodzenie)**: niektórzy filozofowie nigdy nie dostają widelców, bo są stale wyprzedzani przez innych.
+### Główne elementy projektu:
+
+* Obsługa wielu klientów przez wątki (każdy klient otrzymuje osobny wątek).
+* Synchronizacja dostępu do zasobów przy użyciu własnej implementacji SpinLock.
+* Zapisywanie historii rozmów do plików.
+* Autoryzacja użytkowników z prostym hashowaniem haseł.
 
 ---
 
 ## 🛠️ Kompilacja i uruchomienie
 
-Projekt korzysta z **CMake** i działa na systemie **Windows**.
+Projekt działa na systemie **Windows**, wykorzystując biblioteki WinSock2.
 
-### 🔧 Kompilacja
+### 🔧 Kompilacja (CMake)
 
 ```bash
 cmake -B build -DCMAKE_BUILD_TYPE=Release
@@ -29,70 +34,37 @@ cmake --build build --config Release
 ### ▶️ Uruchomienie
 
 ```bash
-./build/SO2.exe <liczba_filozofów> <liczba_iteracji>
+./build/SO2_ChatServer.exe
 ```
 
-### Przykład:
-
-```bash
-./SO2.exe 5 10
-```
+Serwer domyślnie nasłuchuje na porcie `23`.
 
 ---
 
 ## ⚙️ Opis działania
 
-- Każdy filozof to osobny wątek.
-- Wątki wykonują pętlę: **think → get hungry → try to eat → eat → release forks**
-- Program kończy się po wykonaniu przez każdego filozofa zadanej liczby iteracji.
+* Po połączeniu klient jest proszony o zalogowanie lub rejestrację.
+* Po autoryzacji klient wybiera nazwę pokoju czatu.
+* Jeśli pokój nie istnieje, zostaje automatycznie utworzony.
+* Po dołączeniu klient otrzymuje historię pokoju.
+* Wszelkie wiadomości są rozsyłane do pozostałych klientów w pokoju.
+* Po rozłączeniu klient opuszcza pokój czatu.
 
 ---
 
-## 🧵 Wątki
+## 🥝 Synchronizacja i wątki
 
-| Element         | Reprezentacja                                              |
-|-----------------|------------------------------------------------------------|
-| Filozof         | Wątek `std::thread`                                        |
-| Widelce         | Indeksy w tablicy `bool forkAvailable[]` w klasie `Waiter` |
-| Kelner (Waiter) | Wspólny obiekt kontrolujący dostęp do widelców             |
+| Element                 | Mechanizm                             |
+| ----------------------- | ------------------------------------- |
+| Obsługa klienta         | `std::thread`                         |
+| Lista klientów w pokoju | `SpinLock` w klasie `ChatRoom`        |
+| Lista pokoi             | `SpinLock` w klasie `ChatRoomManager` |
+| Plik użytkowników       | `SpinLock` w klasie `UserManager`     |
 
----
+### Użyty SpinLock
 
-## 🔐 Sekcje krytyczne
-
-| Sekcja                          | Rozwiązanie                                                |
-|---------------------------------|------------------------------------------------------------|
-| Dostęp do konsoli (wypisywanie) | `std::mutex` – globalny `printMutex`                       |
-| Dostęp do widelców              | `std::mutex` + `std::condition_variable` w klasie `Waiter` |
-
-### Zasada działania `Waiter`:
-
-- Filozof **prosi** kelnera o dwa widelce.
-- Jeśli oba są dostępne – dostaje je.
-- Jeśli nie – **czeka**, aż zostaną zwolnione.
-- Po zjedzeniu **oddaje** widelce i sygnalizuje czekającym.
-
-To rozwiązanie zapewnia:
-
-- brak zakleszczeń,
-- brak głodzenia,
-- sprawiedliwe podejście do współdzielonych zasobów.
-
----
-
-## 💻 Przykładowy wynik działania
-
-```
-Iteration 1
-Philosopher 0 -> THINK
-Philosopher 1 -> THINK
-Philosopher 2 -> THINK
-Philosopher 1 -> IS HUNGRY
-Philosopher 1 -> EAT
-Philosopher 1 -> THINK
-...
-All philosophers have finished eating.
-```
+* Prosta implementacja oparta na `__sync_lock_test_and_set`.
+* Zalecane tylko dla krótkich sekcji krytycznych.
 
 ---
 
@@ -100,23 +72,23 @@ All philosophers have finished eating.
 
 ```
 .
-├── main.cpp               # Główna pętla programu
-├── philosopher.hpp/cpp    # Klasa filozofa (wątki)
-├── waiter.hpp/cpp         # Klasa kelnera (synchronizacja)
-├── CMakeLists.txt         # Konfiguracja budowania
-└── README.md              # Dokumentacja projektu
+├── main.cpp             # Uruchamianie serwera
+├── client_handler.*     # Obsługa pojedynczego klienta
+├── user_manager.*       # Zarządzanie użytkownikami
+├── chat_room.*          # Obsługa pojedynczego pokoju czatu
+├── chat_room_manager.*  # Zarządzanie pokojami
+├── SpinLock.h           # Implementacja spinlocka
+├── data/                # Pliki użytkowników i historii czatu
+└── README.md            # Dokumentacja projektu
 ```
 
 ---
 
-## 📝 Uwagi końcowe
+## 🖋️ Uwagi końcowe
 
-- Program nie używa gotowych klas do zarządzania filozofami czy forkami – wszystko zaimplementowano ręcznie przy użyciu
-  `std::mutex` i `std::condition_variable`.
-
-- Całość przetestowana z różną liczbą filozofów (3–10).
+* Historia czatu zapisywana jest per pokój w katalogu `data/`.
+* Obsługa WinSock2 wymaga inicjalizacji (WSAStartup/WSACleanup).
 
 ---
 
-© 2025 | Systemy Operacyjne 2 
-
+© 2025 | Systemy Operacyjne 2
