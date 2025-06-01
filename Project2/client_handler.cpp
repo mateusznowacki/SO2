@@ -18,9 +18,13 @@ ClientHandler::ClientHandler(int client_socket, UserManager* userMgr, ChatRoomMa
 
 void ClientHandler::send_message(const std::string& msg) {
     std::string formatted = msg;
-    if (!msg.empty() && msg.back() != '\n') {
-        formatted += "\r\n"; // lepiej niż tylko \n
+    // Usuwamy wszelkie pojedyncze \n i \r na końcu
+    while (!formatted.empty() && (formatted.back() == '\n' || formatted.back() == '\r')) {
+        formatted.pop_back();
     }
+
+    formatted += "\r\n"; // zawsze na końcu dokładnie \r\n
+
 #ifdef _WIN32
     send(client_fd, formatted.c_str(), static_cast<int>(formatted.length()), 0);
 #else
@@ -85,7 +89,7 @@ bool ClientHandler::authenticate_user(std::string& username) {
 
     if (answer == "yes") {
         if (user_manager->login(username, password)) {
-            send_message("Login successful.\nEnter chat room name: ");
+            send_message("Login successful.\r\nEnter chat room name: ");
             return true;
         } else {
             send_message("Invalid credentials.\n");
@@ -93,7 +97,7 @@ bool ClientHandler::authenticate_user(std::string& username) {
         }
     } else if (answer == "no") {
         if (user_manager->register_user(username, password)) {
-            send_message("Account created. You are now logged in.\nEnter chat room name: ");
+            send_message("Account created. You are now logged in.\r\nEnter chat room name: ");
             return true;
         } else {
             send_message("Username already exists.\n");
